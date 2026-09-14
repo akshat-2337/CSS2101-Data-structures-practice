@@ -24,7 +24,17 @@ int main(){
     tail->data=0;
     tail->next=NULL;
 
-    printf("\n Done");
+    
+    //traversal of linked list
+
+    struct Node *temp; //creating a temporary node to traverse the linked list (points at the head node)
+    temp=head;
+    
+    while(temp!=NULL){  //temp is a pointer so it knows when it reaches the end of the linked list..
+
+        printf(" %d \n", temp->data);
+        temp=temp->next;
+    }
 
     free(head);
     free(newnode);
