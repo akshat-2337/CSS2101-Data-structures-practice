@@ -1,6 +1,7 @@
-//insertion in middle of linked list
-#include <stdio.h>
-#include <stdlib.h>
+//deletion from start
+
+#include<stdio.h>
+#include<stdlib.h>
 
 int main(){
 
@@ -21,34 +22,23 @@ int main(){
     tail->data = 30;
     tail->next = NULL;
 
-    struct node *newnode = (struct node *)malloc(sizeof(struct node));
-    scanf("%d", &newnode->data);
-
     struct node *temp = head;
-    for(int i=0; i<1; i++){
-        if(temp==NULL){
-            printf("Memory not allocated\n");
-            return 1;
-        }
-        temp=temp->next;
+    
+    printf("Linked list before deletion: ");
+    while(temp != NULL){
+        printf("%d ", temp->data);
+        temp = temp->next;
     }
 
-    newnode->next = temp->next;
-    temp->next = newnode;
-    printf("Linked list after insertion in middle: ");
+    head = head->next;
+
     struct node *ptr = head;
+    printf("\nLinked list after deletion from start: ");
     while(ptr != NULL){
         printf("%d ", ptr->data);
         ptr = ptr->next;
     }
 
 
-    free(head);
-    free(mid);
-    free(tail);
-    free(newnode);
-    free(temp);
-    free(ptr);
-    
     return 0;
 }
