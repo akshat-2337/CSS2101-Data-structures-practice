@@ -17,15 +17,15 @@ struct node* createnode(int coef, int expon){
     return newnode;
 }
 
-void insertend(struct node** head, int coef, int expon){
+struct node* insertend(struct node* head, int coef, int expon){
 
     struct node* tmp = createnode(coef, expon);
 
-    if(*head == NULL){
-        *head = tmp;
+    if(head == NULL){
+        head = tmp;
     }
     else{
-        struct node* ptr = *head;
+        struct node* ptr = head;
 
         while(ptr->next != NULL){
             ptr = ptr->next;
@@ -33,6 +33,8 @@ void insertend(struct node** head, int coef, int expon){
 
         ptr->next = tmp;
     }
+
+    return head;
 }
 
 void display(struct node* head){
@@ -58,12 +60,12 @@ struct node* add(struct node* p1, struct node* p2){
     while(p1 != NULL && p2 != NULL){
 
         if(p1->expon > p2->expon){
-            insertend(&result, p1->coef, p1->expon);
+            result = insertend(result, p1->coef, p1->expon);
             p1 = p1->next;
         }
 
         else if(p1->expon < p2->expon){
-            insertend(&result, p2->coef, p2->expon);
+            result = insertend(result, p2->coef, p2->expon);
             p2 = p2->next;
         }
 
@@ -71,7 +73,7 @@ struct node* add(struct node* p1, struct node* p2){
             int sum = p1->coef + p2->coef;
 
             if(sum != 0){
-                insertend(&result, sum, p1->expon);
+                result = insertend(result, sum, p1->expon);
             }
 
             p1 = p1->next;
@@ -80,12 +82,12 @@ struct node* add(struct node* p1, struct node* p2){
     }
 
     while(p1 != NULL){
-        insertend(&result, p1->coef, p1->expon);
+        result = insertend(result, p1->coef, p1->expon);
         p1 = p1->next;
     }
 
     while(p2 != NULL){
-        insertend(&result, p2->coef, p2->expon);
+        result = insertend(result, p2->coef, p2->expon);
         p2 = p2->next;
     }
 
@@ -108,7 +110,7 @@ int main(){
 
     for(int i = 0; i < n1; i++){
         scanf("%d %d", &coef, &expon);
-        insertend(&p1, coef, expon);
+        p1 = insertend(p1, coef, expon);
     }
 
     printf("Enter number of terms in second polynomial: ");
@@ -118,7 +120,7 @@ int main(){
 
     for(int i = 0; i < n2; i++){
         scanf("%d %d", &coef, &expon);
-        insertend(&p2, coef, expon);
+        p2 = insertend(p2, coef, expon);
     }
 
     printf("\nFirst polynomial: ");
